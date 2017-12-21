@@ -52,7 +52,7 @@ def ardForward(speed, cmdSeq):
         spd = struct.unpack('i', struct.pack('f', speed))[0]
     else:
         spd = speed
-    droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,-spd,0,0,0)
+    droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,0,-spd,0,0)
     droneSock.sendto(droneComd, (droneIP, dronePort))
     cmdSeq = cmdSeq + 1
     return cmdSeq
@@ -63,7 +63,7 @@ def ardBackward(speed, cmdSeq):
         spd = struct.unpack('i', struct.pack('f', speed))[0]
     else:
         spd = speed
-    droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,spd,0,0,0)
+    droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,0,spd,0,0)
     droneSock.sendto(droneComd, (droneIP, dronePort))
     cmdSeq = cmdSeq + 1
     return cmdSeq
@@ -74,7 +74,7 @@ def ardLeft(speed, cmdSeq):
         spd = struct.unpack('i', struct.pack('f', speed))[0]
     else:
         spd = speed
-    droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,0,-spd,0,0)
+    droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,-spd,0,0,0)
     droneSock.sendto(droneComd, (droneIP, dronePort))
     cmdSeq = cmdSeq + 1
     return cmdSeq
@@ -85,7 +85,7 @@ def ardRight(speed, cmdSeq):
         spd = struct.unpack('i', struct.pack('f', speed))[0]
     else:
         spd = speed
-    droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,0,spd,0,0)
+    droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,spd,0,0,0)
     droneSock.sendto(droneComd, (droneIP, dronePort))
     cmdSeq = cmdSeq + 1
     return cmdSeq
@@ -117,7 +117,7 @@ def ardLrotate(omega, cmdSeq):
     if type(omega) == float:
         spd = struct.unpack('i', struct.pack('f', omega))[0]
     else:
-        spd = speed
+        spd = omega
     droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,0,0,0,-spd)
     droneSock.sendto(droneComd, (droneIP, dronePort))
     cmdSeq = cmdSeq + 1
@@ -125,10 +125,10 @@ def ardLrotate(omega, cmdSeq):
 
 def ardRrotate(omega, cmdSeq):
     print "Rotate right"
-    if type(speed) == float:
+    if type(omega) == float:
         spd = struct.unpack('i', struct.pack('f', omega))[0]
     else:
-        spd = speed
+        spd = omega
     droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,0,0,0,spd)
     droneSock.sendto(droneComd, (droneIP, dronePort))
     cmdSeq = cmdSeq + 1

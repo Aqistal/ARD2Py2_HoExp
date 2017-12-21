@@ -15,40 +15,42 @@ while running:
         cv2.imshow('frame', frame)
         key = cv2.waitKey(1)
         if key == 27:
+            # Esc: Stop
             running = False
             dSeq = ardEmergency(dSeq)
-        else if key == 119 or key == 87:
-            # Move forward
+        elif key == 119 or key == 87:
+            # W: Move forward
             dSeq = ardForward(0.5, dSeq)
-        else if key == 115 or key == 83:
-            # Move backward
+        elif key == 115 or key == 83:
+            # S: Move backward
             dSeq = ardBackward(0.5, dSeq)
-        else if key == 97 or key == 65:
-            # Move left
+        elif key == 97 or key == 65:
+            # A: Move left
             dSeq = ardLeft(0.5, dSeq)
-        else if key == 100 or key == 68:
-            # Move right
+        elif key == 100 or key == 68:
+            # D: Move right
             dSeq = ardRight(0.5, dSeq)
-        else if key == 113 or key == 81:
-            # Rotate left
+        elif key == 113 or key == 81:
+            # Q: Rotate left
             dSeq = ardLrotate(0.5, dSeq)
-        else if key == 101 or key == 69:
-            # Rotate right
+        elif key == 101 or key == 69:
+            # E: Rotate right
             dSeq = ardRrotate(0.5, dSeq)
-        else if key == 32:
-            # Take off
+        elif key == 32:
+            # Space: Take off
             dSeq = ardTakeoff(dSeq)
-        else if key == 13:
-            # Landing
+        elif key == 13:
+            # Enter: Landing
             dSeq = ardLanding(dSeq)
-        else if key == 111 or key == 79:
-            # Go up
+        elif key == 111 or key == 79:
+            # O: Go up
             dSeq = ardUp(0.5, dSeq)
-        else if key == 108 or key == 76:
-            # Go down
+        elif key == 108 or key == 76:
+            # L: Go down
             dSeq = ardDown(0.5, dSeq)
         else:
-            # Do nothing
+            # Hover when do nothing
+            dSeq = ardHover(dSeq)
     else:
         print 'Error reading video feed'
 
