@@ -40,7 +40,6 @@ def ardEmergency(cmdSeq):
     return cmdSeq
 
 def ardHover(cmdSeq):
-    print "Hovering"
     droneComd = "AT*PCMD=%i,%s\r" % (cmdSeq,"1,0,0,0,0")
     droneSock.sendto(droneComd, (droneIP, dronePort))
     cmdSeq = cmdSeq + 1
@@ -130,6 +129,19 @@ def ardRrotate(omega, cmdSeq):
     else:
         spd = omega
     droneComd = "AT*PCMD=%i,%i,%i,%i,%i,%i\r" % (cmdSeq,1,0,0,0,spd)
+    droneSock.sendto(droneComd, (droneIP, dronePort))
+    cmdSeq = cmdSeq + 1
+    return cmdSeq
+
+def resetWatchdog(cmdSeq):
+    droneComd = "AT*COMWDG=%i\r" % (cmdSeq)
+    droneSock.sendto(droneComd, (droneIP, dronePort))
+    cmdSeq = cmdSeq + 1
+    return cmdSeq
+
+def ardDisconnect(cmdSeq):
+    cmdSeq = ardLanding(cmdSeq)
+    droneComd = "AT*REF=%i,%s\r" % (cmdSeq,"290717952")
     droneSock.sendto(droneComd, (droneIP, dronePort))
     cmdSeq = cmdSeq + 1
     return cmdSeq
